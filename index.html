@@ -214,6 +214,117 @@
             
 
   
+    <article id="post-创建github图床" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>创建github图床并且用jsDelivr CDN加速</p>
+<h3 id="主要思路"><a href="#主要思路" class="headerlink" title="主要思路"></a>主要思路</h3><p>使用 PicGo将图片上传到指定 Github 仓库位置，再利用 jsDelivr 获得图片加速后的 url。</p>
+<p>使用效果：<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/joeyliu6/Blogger@master/static_files/iljw/img/large/20190512151852.png">点击访问图片测试</a></p>
+<p>Github配置</p>
+<p>首先县创建一个<a target="_blank" rel="noopener" href="https://wiki.jikexueyuan.com/project/github-basics/creat-new-repo.html">Github仓库</a>并获取一个 token（它可以让程序拥有控制仓库的权限）。</p>
+<p>点击用户–&gt;Setting</p>
+<p><img src="https://cdn.jsdelivr.net/gh/CMT9606/picture@main/202110231616764.png" alt="image-20211023161613732"></p>
+<ol>
+<li><img src="https://cdn.jsdelivr.net/gh/CMT9606/picture@main/202110231641503.png" alt="image-20211023164128460" style="zoom:80%;" /></li>
+<li><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/3/18/170ebf9a042bb8ff~tplv-t2oaga2asx-watermark.awebp" alt="image"></p>
+</li>
+<li><p>拉到最下面，点击 <code>Generate token</code>，生成并复制。</p>
+</li>
+</ol>
+<h3 id="PicGo-配置"><a href="#PicGo-配置" class="headerlink" title="PicGo 配置"></a>PicGo 配置</h3><ol>
+<li><p>在<a href="https://link.juejin.cn/?target=https://github.com/Molunerfinn/PicGo/releases">此处</a>下载，Windows 系统就选 <code>.exe</code> 结尾的下；</p>
+</li>
+<li><p>安装，打开 PicGo，在「图床设置」处配置 Github 图床；</p>
+</li>
+<li><p><img src="https://cdn.jsdelivr.net/gh/CMT9606/picture@main/202110231639640.webp" alt="image"></p>
+<ol>
+<li><p>设定仓库名：填入你上面创建的仓库名，格式为：<code>用户名/仓库名；</code></p>
+</li>
+<li><p>设定分支名：一般填写 <code>master</code> 就行了；</p>
+</li>
+<li><p>设定 Token：将 Github 配置中得到的 Token 粘贴进去；</p>
+</li>
+<li><p>指定存储路径：你想要把图片放在仓库的哪个位置，比如我是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">static_files/iljw/img/large</span><br></pre></td></tr></table></figure>
+
+<p>，Github 对应的是：</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/3/18/170ebf9a05dbdc5f~tplv-t2oaga2asx-watermark.awebp" alt="image"></p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="jsDelivr-配置"><a href="#jsDelivr-配置" class="headerlink" title="jsDelivr 配置"></a>jsDelivr 配置</h3><p>其实就是上一节 PicGo 配置的最后一条——设定自定义域名。我的设定是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://cdn.jsdelivr.net/gh/joeyliu6/Blogger@master</span><br><span class="line"></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><code>gh</code> 表示来自 Github 的仓库</li>
+<li><code>joeyliu6/Blogger</code> 仓库的具体位置</li>
+<li><code>master</code> 仓库的分支</li>
+</ul>
+<p>好的，在此就配置完成。图片链接形式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://cdn.jsdelivr.net/gh/joeyliu6/Blogger@master/static_files/iljw/img/large/20190512151852.png</span><br><span class="line"></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2020/3/18/170ebf9a05a96fcf~tplv-t2oaga2asx-watermark.awebp" alt="image"></p>
+<p>你可以通过 PicGo 方便地上传图片了，它支持拖拽、点击、剪贴板上传，上传后，图片链接直接复制的你的剪贴板中。</p>
+<p>当然，你也可以通过 Git 命令，将本地图片批量上传到 Github 上，再替换成原文中的图片链接地址，以完成图片迁移的工作。</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>整个过程比较简单，创建 Github 仓库，并获取 token，填入 PicGo 配置即可完成。</p>
+<ul>
+<li>使用 jsDelivr 加速静态文件访问，能够优化博客体验。</li>
+<li>在 Github 存储图片，利于博主对于图片的掌控。</li>
+<li>使用 PicGo 的原因是因为能够方便地将上传图片到 Github，并直接获取 jsDelivr 的加速后的图片地址。</li>
+</ul>
+<p>Github 仓库的容量有 1G 的上限，对个人博客来说绰绰有余，我目前博客所使用图片大小现在是 10M 左右。若想 100% 使用，则我的博文最少也得有上千篇了。</p>
+<p>作者：dfface<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904095807979534">https://juejin.cn/post/6844904095807979534</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/24/%E5%88%9B%E5%BB%BAgithub%E5%9B%BE%E5%BA%8A/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
